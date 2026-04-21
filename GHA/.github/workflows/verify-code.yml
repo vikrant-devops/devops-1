@@ -1,6 +1,8 @@
 name: Code Quality Check
 on:
-  pull_request: # Runs when a PR is opened or updated
+  push:
+    branches: [main]
+  pull_request:
     branches: [main]
 
 jobs:
@@ -8,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4 # This "clones" your code into the runner
-
+        uses: actions/checkout@v4
+      
       - name: List files for debugging
         run: ls -R
 
@@ -17,7 +19,7 @@ jobs:
         run: |
           if find . -type f -empty | read; then
             echo "Error: Empty files found!"
-            exit 1 # This fails the Action
+            exit 1
           else
             echo "All files look good."
           fi
