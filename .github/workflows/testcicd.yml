@@ -16,11 +16,11 @@ jobs:
         with:
           name: build-files
           patth: build/
-deploy:
-  needs: build
-  runs-on: ubuntu-latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-  steps:
+    steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
