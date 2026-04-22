@@ -1,0 +1,33 @@
+---
+name: Artifact Demo
+on : push 
+jobs:
+  build:
+    runs-on: ubunbtu-latest
+
+    steps:
+      - name: Build step
+        run: |
+          mkdir build
+          echo "Calculator App Ready" > build/output.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          patth: build/
+deploy:
+  needs: build
+  runs-on: ubuntu-latest
+
+  steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+          
+      - name: Show files
+        run: ls -la
+
+      - name: Read output
+        run: cat build/output.txt
