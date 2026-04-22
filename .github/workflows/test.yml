@@ -29,4 +29,8 @@ jobs:
            mkdir build
            echo "Calculater App Ready for Build" > build/output.txt
            cat build/output.txt
-           
+      - name: Step 7 - Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: build/
