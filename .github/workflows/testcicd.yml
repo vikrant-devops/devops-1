@@ -1,33 +1,35 @@
----
 name: Artifact Demo
-on : push 
+
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build step
+      - name: Build Step
         run: |
           mkdir build
-          echo "Calculator App Ready" > build/output.txt
-      
-      - name: Upload artifact
+          echo "Calculator App Ready 🚀" > build/output.txt
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-files
-          patth: build/
+          path: build/
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifact
+      - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: build-files
-          
-      - name: Show files
+
+      - name: Show Files
         run: ls -la
 
-      - name: Read output
-        run: cat build/output.txt
+      - name: Read Output
+        run: cat output.txt
