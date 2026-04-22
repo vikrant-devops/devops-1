@@ -34,3 +34,8 @@ jobs:
         with:
           name: build-files
           path: build/
+      - name: Step 8 - Show Uploaded Artifacts
+        run: ls -la
+
+      - name: Step 9 - Read Output File
+        run: cat build/output.txt
