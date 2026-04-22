@@ -15,3 +15,6 @@ jobs:
 
       - name: Step 3 - Show Files
         run: ls -la
+      - name: Step 4 - Break Pipeline
+        run: exit 1
+
