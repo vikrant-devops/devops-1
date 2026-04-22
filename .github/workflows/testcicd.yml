@@ -3,7 +3,7 @@ name: Artifact Demo
 on : push 
 jobs:
   build:
-    runs-on: ubunbtu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Build step
