@@ -15,6 +15,6 @@ jobs:
 
       - name: Step 3 - Show Files
         run: ls -la
-      - name: Step 4 - Break Pipeline
-        run: exit 1
+      - name: Step 4 - Fixing the error
+        run: echo "This step is added to fix the error in the previous steps"
 
