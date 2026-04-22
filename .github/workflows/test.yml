@@ -24,3 +24,9 @@ jobs:
             echo "Environment Variables :"
             echo "Files:"
             ls -la
+      - name: Step 6 - Build Step
+        run: |
+           mkdir build
+           echo "Calculater App Ready for Build" > build/output.txt
+           cat build/output.txt
+           
