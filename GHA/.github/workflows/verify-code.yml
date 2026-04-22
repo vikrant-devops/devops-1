@@ -1,0 +1,19 @@
+name: Fresh Start Workflow
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  initial-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: System Health Check
+        run: |
+          echo "GitHub Actions is officially connected!"
+          echo "Runner OS: ${{ runner.os }}"
+          date
