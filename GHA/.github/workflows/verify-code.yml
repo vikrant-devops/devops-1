@@ -1,12 +1,10 @@
-name: Fresh Start
-on: [push] # This ensures it runs immediately on every commit
+name: Root Directory Fix
+on: [push] # This is the critical trigger
 
 jobs:
-  health-check:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Verify Connection
-        run: echo "GitHub Actions is successfully rebuilt!"
+      - uses: actions/checkout@v4
+      - name: Success Message
+        run: echo "The workflow is finally in the right place!"
