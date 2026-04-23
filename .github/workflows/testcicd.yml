@@ -1,54 +1,26 @@
-name: Full CI Pipeline
+name: Deploy to GitHub Pages
 
-on: push
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Build Step
-        run: |
-          mkdir build
-          echo "Calculator App Ready 🚀" > build/output.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: build/
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-files
-
-      - name: Run Test
-        run: |
-          if grep -q "Calculator" output.txt; then
-            echo "Test Passed ✅"
-          else
-            echo "Test Failed ❌"
-            exit 1
-          fi
-
   deploy:
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: build-files
+          path: .
 
-      - name: Deploy Step
-        run: echo "Deploying Calculator App 🚀"
-
-      - name: Show Output
-        run: cat output.txt
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
