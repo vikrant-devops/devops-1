@@ -1,4 +1,4 @@
-name: Artifact Demo
+name: Full CI Pipeline
 
 on: push
 
@@ -18,7 +18,7 @@ jobs:
           name: build-files
           path: build/
 
-  deploy:
+  test:
     needs: build
     runs-on: ubuntu-latest
 
@@ -28,8 +28,27 @@ jobs:
         with:
           name: build-files
 
-      - name: Show Files
-        run: ls -la
+      - name: Run Test
+        run: |
+          if grep -q "Calculator" output.txt; then
+            echo "Test Passed ✅"
+          else
+            echo "Test Failed ❌"
+            exit 1
+          fi
 
-      - name: Read Output
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+
+      - name: Deploy Step
+        run: echo "Deploying Calculator App 🚀"
+
+      - name: Show Output
         run: cat output.txt
